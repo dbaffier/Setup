@@ -17,7 +17,7 @@ ENV LC_CTYPE C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
 RUN dpkg --add-architecture i386 && \
 	apt-get update && \
-	apt-get install -y build-essential nasm python strace ltrace curl wget man john gcc vim gdb gdb-multiarch python3 python-pip libssl-dev git make python3-pip && \
+	apt-get install -y build-essential nasm python tshark strace ltrace curl wget man john gcc vim gdb gdb-multiarch python3 python-pip libssl-dev git make python3-pip && \
 	pip install pwntools && \
 	pip3 install pwntools && \
 	mkdir tools && cd tools && \
