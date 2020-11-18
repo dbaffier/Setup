@@ -11,10 +11,9 @@ FROM ubuntu:19.10
 
 ENV LC_CTYPE C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
-RUN DPKG --add-architecture i386 && \
+RUN dpkg --add-architecture i386 && \
 	apt-get update && \
-	apt-get install -y build-essential strace ltrace curl wget man john gcc vim gdb gdb-multiarch python3 libssl-dev git make python3-pip
-	pip install pwntools
+	apt-get install -y build-essential strace ltrace curl wget man john gcc vim gdb gdb-multiarch python3 libssl-dev git make python3-pip && \
 	pip3 install pwntools && \
 	mkdir tools && cd tools && \
 	git clone https://github.com/radare/radare2 && cd radare2 && sys/install.sh && \
