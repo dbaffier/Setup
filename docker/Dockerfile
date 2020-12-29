@@ -1,24 +1,16 @@
-# need docker and docker-machine installed.
+# docker build -t ctf:ubuntu19.10 .
+# If using Windows
+      # docker run --rm -v %cd%:/pwd --cap-add=SYS_PTRACE --security-opt seccomp=unconfined -d --name ctf -i ctf:ubuntu19.10
+# If using Linux
+      # docker run --rm -v $PWD:/pwd --cap-add=SYS_PTRACE --security-opt seccomp=unconfined -d --name ctf -i ctf:ubuntu19.10
+# docker exec -it ctf /bin/bash
 
-# docker-machine create --driver=virtualbox <name>
-
-# docker build -t <name> ..
-
-# docker run --rm -v $PWD:/pwd --cap-add=SYS_PTRACE --security-opt seccomp=unconfined ctf -d -it <name>
-
-# docker exec -it <name> /bin/bash
-
-
-## / ! \ remove apt-get install and add what you need
-
-FROM ubuntu:19.10
-
+FROM ubuntu:20.04
 ENV LC_CTYPE C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
 RUN dpkg --add-architecture i386 && \
-	apt-get update && \
-	apt-get install -y build-essential nasm python tshark strace ltrace curl wget man john gcc vim gdb gdb-multiarch python3 python-pip libssl-dev git make python3-pip && \
-	pip3 install pwntools && \
-	mkdir tools && cd tools && \
-	git clone https://github.com/radare/radare2 && cd radare2 && sys/install.sh && \
-	cd .. && git clone https://github.com/pwndbg/pwndbg && cd pwndbg && git checkout stable && ./setup.sh
+apt-get update && \
+apt-get install -y build-essential jq strace ltrace curl wget rubygems gcc dnsutils netcat gcc-multilib net-tools vim gdb gdb-multiarch python3 python3-pip python3-dev libssl-dev libffi-dev wget git make procps libpcre3-dev libdb-dev libxt-dev libxaw7-dev libc6:i386 libncurses5:i386 libstdc++6:i386 && \
+pip3 install pwntools keystone-engine unicorn capstone ropper && \
+mkdir tools && cd tools && \
+git clone https://github.com/radare/radare2 && cd radare2 && sys/install.sh

@@ -1,3 +1,3 @@
 from pwn import *
-print( asm( shellcraft.cat(".passwd")  ) )
+print( asm( shellcraft.cat()  ) )
 print( len (asm( shellcraft.cat(".passwd")  ) ))
